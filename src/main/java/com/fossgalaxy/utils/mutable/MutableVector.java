@@ -2,6 +2,7 @@ package com.fossgalaxy.utils.mutable;
 
 import com.fossgalaxy.utils.AbstractVector;
 import com.fossgalaxy.utils.Vector;
+import com.fossgalaxy.utils.immutable.ImmutableVector;
 
 /**
  * A mutable n-dimensional vector class.
@@ -20,7 +21,7 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector multiply(Vector other) {
+	public MutableVector multiply(Vector other) {
 		
 		for (int i=0; i<parts.length; i++) {
 			parts[i] *= other.getComponent(i);
@@ -30,7 +31,7 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector multiply(double other) {
+	public MutableVector multiply(double other) {
 		// TODO Auto-generated method stub
 		return this;
 	}
@@ -42,12 +43,12 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector add(Vector other) {
+	public MutableVector add(Vector other) {
 		return add(other, 1);
 	}
 
 	@Override
-	public Vector add(Vector other, double factor) {
+	public MutableVector add(Vector other, double factor) {
 		for (int i=0; i<parts.length; i++) {
 			parts[i] += (other.getComponent(i) * factor);
 		}
@@ -56,12 +57,12 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector subtract(Vector other) {
+	public MutableVector subtract(Vector other) {
 		return subtract(other, 1);
 	}
 
 	@Override
-	public Vector subtract(Vector other, double factor) {
+	public MutableVector subtract(Vector other, double factor) {
 		for (int i=0; i<parts.length; i++) {
 			parts[i] += (other.getComponent(i) * factor);
 		}
@@ -69,30 +70,30 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector wrap(double width, double height) {
+	public MutableVector wrap(double width, double height) {
 		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
-	public Vector normalise() {
+	public MutableVector normalise() {
 		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
-	public Vector limit(double limit) {
+	public MutableVector limit(double limit) {
 		return normalise().multiply(limit);
 	}
 
 	@Override
-	public Vector rotate(double rads) {
+	public MutableVector rotate(double rads) {
 		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
-	public Vector rotateDeg(double deg) {
+	public MutableVector rotateDeg(double deg) {
 		return rotate(Math.toRadians(deg));
 	}
 	
@@ -109,13 +110,18 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	@Override
-	public Vector getCopy() {
+	public MutableVector getCopy() {
 		return new MutableVector(this);
 	}
 	
 	@Override
 	public void setComponent(int i, double newVal) {
 		parts[i] = newVal;
+	}
+
+	@Override
+	public ImmutableVector getImmutableCopy() {
+		return new ImmutableVector(parts.length, parts);
 	}
 	
 }

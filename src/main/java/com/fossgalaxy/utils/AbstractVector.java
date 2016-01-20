@@ -27,6 +27,17 @@ public abstract class AbstractVector implements Vector {
 	}
 
 	@Override
+	public double dot(Vector other) {
+		
+		double result = 0;
+		for (int i=0; i<parts.length; i++) {
+			result += parts[i] * other.getComponent(i);
+		}
+		
+		return result;
+	}
+	
+	@Override
 	public int getDimensions() {
 		return parts.length;
 	}
