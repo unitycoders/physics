@@ -8,30 +8,14 @@ import java.util.Arrays;
  * This vector will modifiy and return it's self as the argument
  * to the maths functions.
  */
-public class MutableVector implements Vector {
-
-	protected final double[] parts;
-	private int n;
+public class MutableVector extends AbstractVector implements MutableVectorI {
 	
 	public MutableVector(int n, double ... parts){
-		if (parts == null || parts.length != n) {
-			throw new IllegalArgumentException("incorrect number of parts provided");
-		}
-		
-		this.n = n;
-		this.parts = Arrays.copyOf(parts, n);
+		super(n, parts);
 	}
 	
 	public MutableVector(Vector vector) {
-		this.n = vector.getDimensions();
-		this.parts = new double[n];
-		for (int i=0; i<n; i++) {
-			parts[i] = vector.getComponent(i);
-		}
-	}
-
-	public int getDimensions() {
-		return n;
+		super(vector);
 	}
 
 	public Vector multiply(Vector other) {
@@ -102,16 +86,12 @@ public class MutableVector implements Vector {
 		return 0;
 	}
 
-	public double getComponent(int i) {
-		if (i < 0 || i > parts.length) {
-			throw new IllegalArgumentException("invalid component");
-		}
-		
-		return parts[i];
-	}
-
 	public Vector getCopy() {
 		return new MutableVector(this);
+	}
+
+	public void setComponent(int i, double newVal) {
+		parts[i] = newVal;
 	}
 	
 }

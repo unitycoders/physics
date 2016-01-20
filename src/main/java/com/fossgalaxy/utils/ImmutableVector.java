@@ -1,36 +1,19 @@
 package com.fossgalaxy.utils;
 
-import java.util.Arrays;
-
 /**
  * An immutable n-dimensional vector class.
  * 
  * This vector class will always return immutable versions of the math functions.
  */
-public class ImmutableVector implements Vector {
+public class ImmutableVector extends AbstractVector {
 
-	private final double[] parts;
-	private int n;
 	
 	public ImmutableVector(int n, double ... parts){
-		if (parts == null || parts.length != n) {
-			throw new IllegalArgumentException("incorrect number of parts provided");
-		}
-		
-		this.n = n;
-		this.parts = Arrays.copyOf(parts, n);
+		super(n, parts);
 	}
 	
 	public ImmutableVector(Vector vector) {
-		this.n = vector.getDimensions();
-		this.parts = new double[n];
-		for (int i=0; i<n; i++) {
-			parts[i] = vector.getComponent(i);
-		}
-	}
-
-	public int getDimensions() {
-		return n;
+		super(vector);
 	}
 
 	public Vector multiply(Vector other) {
@@ -101,13 +84,6 @@ public class ImmutableVector implements Vector {
 		return 0;
 	}
 
-	public double getComponent(int i) {
-		if (i < 0 || i > parts.length) {
-			throw new IllegalArgumentException("invalid component");
-		}
-		
-		return parts[i];
-	}
 
 	public Vector getCopy() {
 		return new ImmutableVector(this);
