@@ -26,10 +26,12 @@ public abstract class AbstractVector implements Vector {
 		}
 	}
 
+	@Override
 	public int getDimensions() {
 		return parts.length;
 	}
-
+	
+	@Override
 	public double getComponent(int i) {
 		if (i < 0 || i > parts.length) {
 			throw new IllegalArgumentException("invalid component");
@@ -37,8 +39,6 @@ public abstract class AbstractVector implements Vector {
 		
 		return parts[i];
 	}
-
-	public abstract Vector getCopy();
 	
 	@Override
 	public String toString() {
