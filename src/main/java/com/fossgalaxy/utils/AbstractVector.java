@@ -38,6 +38,17 @@ public abstract class AbstractVector implements Vector {
 	}
 	
 	@Override
+	public double magnatude() {
+		double length = 0;
+		
+		for (int i=0; i<parts.length; i++) {
+			length += Math.pow(parts[i], 2);
+		}
+		
+		return Math.sqrt(length);
+	}
+	
+	@Override
 	public int getDimensions() {
 		return parts.length;
 	}

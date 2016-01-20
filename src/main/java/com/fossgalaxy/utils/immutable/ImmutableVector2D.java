@@ -1,11 +1,15 @@
 package com.fossgalaxy.utils.immutable;
 
 import com.fossgalaxy.utils.Vector;
+import com.fossgalaxy.utils.mutable.Vector2D;
 
+/**
+ * Version of the ImmutableVector class with optimisations for 2D Vectors.
+ */
 public class ImmutableVector2D extends ImmutableVector {
 	public static final Integer SIZE = 2;
-	public static final Integer PART_X = 0;
-	public static final Integer PART_Y = 1;
+	public static final Integer X = 0;
+	public static final Integer Y = 1;
 	
 	//common vectors (useful for saving memory)
 	public static final ImmutableVector2D ZERO = new ImmutableVector2D(0,0);
@@ -20,10 +24,20 @@ public class ImmutableVector2D extends ImmutableVector {
 	}
 	
 	public double getX() {
-		return parts[PART_X];
+		return parts[X];
 	}
 	
 	public double getY() {
-		return parts[PART_Y];
+		return parts[Y];
+	}
+	
+	@Override
+	public ImmutableVector2D getCopy() {
+		return this;
+	}
+	
+	@Override
+	public double magnatude() {
+		return Math.hypot(parts[X], parts[Y]);
 	}
 }

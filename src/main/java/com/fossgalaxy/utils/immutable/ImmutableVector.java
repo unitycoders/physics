@@ -44,42 +44,66 @@ public class ImmutableVector extends AbstractVector {
 	
 	@Override
 	public ImmutableVector add(Vector other) {
-		double[] results = new double[parts.length];
-		for (int i=0; i<parts.length; i++) {
-			results[i] = parts[i] + other.getComponent(i);
-		}
-		
-		return new ImmutableVector(parts.length, results);
+		return add(other, 1);
 	}
 
 	@Override
 	public ImmutableVector add(Vector other, double factor) {
-		// TODO Auto-generated method stub
-		return null;
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = parts[i] + (other.getComponent(i) * factor);
+		}
+		
+		return new ImmutableVector(parts.length, results);
 	}
 	
 	@Override
 	public ImmutableVector subtract(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		return add(other, -1);
 	}
 
 	@Override
 	public ImmutableVector subtract(Vector other, double factor) {
-		// TODO Auto-generated method stub
-		return null;
+		return add(other, -factor);
 	}
 
 	@Override
-	public ImmutableVector wrap(double width, double height) {
-		// TODO Auto-generated method stub
-		return null;
+	public ImmutableVector wrap(double ... limits) {
+		if (limits == null || limits.length != parts.length) {
+			throw new IllegalArgumentException("Incorrect number of limits provided");
+		}
+		
+		boolean changed = false;
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = parts[i] % limits[i];
+			
+			if ( results[i] != parts[i]) {
+				changed = true;
+			}
+		}
+		
+		if (!changed) {
+			return this;
+		} else {
+			return new ImmutableVector(results.length, results);
+		}
 	}
 
 	@Override
 	public ImmutableVector normalise() {
-		// TODO Auto-generated method stub
-		return null;
+		double length = magnatude();
+		
+		if (length == 1) {
+			return this;
+		}
+		
+		double[] result = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			result[i] = parts[i] / length;
+		}
+		
+		return new ImmutableVector(result.length, result);
 	}
 
 	@Override
@@ -96,12 +120,6 @@ public class ImmutableVector extends AbstractVector {
 	@Override
 	public ImmutableVector rotateDeg(double deg) {
 		return rotate(Math.toRadians(deg));
-	}
-
-	@Override
-	public double magnatude() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

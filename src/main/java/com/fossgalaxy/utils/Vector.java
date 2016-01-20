@@ -15,7 +15,7 @@ public interface Vector {
 	public Vector subtract(Vector other);
 	public Vector subtract(Vector other, double factor);
 	
-	public Vector wrap(double width, double height);
+	public Vector wrap(double ... limits);
 	
 	public Vector normalise();
 	public Vector limit(double limit);

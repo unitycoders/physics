@@ -22,17 +22,18 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 
 	@Override
 	public MutableVector multiply(Vector other) {
-		
 		for (int i=0; i<parts.length; i++) {
 			parts[i] *= other.getComponent(i);
 		}
-		
 		return this;
 	}
 
 	@Override
 	public MutableVector multiply(double other) {
-		// TODO Auto-generated method stub
+		for (int i=0; i<parts.length; i++) {
+			parts[i] *= other;
+		}
+		
 		return this;
 	}
 
@@ -64,20 +65,32 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	@Override
 	public MutableVector subtract(Vector other, double factor) {
 		for (int i=0; i<parts.length; i++) {
-			parts[i] += (other.getComponent(i) * factor);
+			parts[i] -= (other.getComponent(i) * factor);
 		}
 		return this;
 	}
 
 	@Override
-	public MutableVector wrap(double width, double height) {
-		// TODO Auto-generated method stub
+	public MutableVector wrap(double ... limits) {
+		if (limits == null || limits.length != parts.length) {
+			throw new IllegalArgumentException("Incorrect number of limits provided");
+		}
+		
+		for (int i=0; i<parts.length; i++) {
+			parts[i] = Math.max(parts[i], limits[i]);
+		}
+		
 		return this;
 	}
 
 	@Override
 	public MutableVector normalise() {
-		// TODO Auto-generated method stub
+		double length = magnatude();
+		
+		for (int i=0; i<parts.length; i++) {
+			parts[i] /= length;
+		}
+
 		return this;
 	}
 
@@ -95,12 +108,6 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	@Override
 	public MutableVector rotateDeg(double deg) {
 		return rotate(Math.toRadians(deg));
-	}
-	
-	@Override
-	public double magnatude() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

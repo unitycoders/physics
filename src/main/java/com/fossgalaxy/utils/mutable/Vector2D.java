@@ -2,6 +2,9 @@ package com.fossgalaxy.utils.mutable;
 
 import com.fossgalaxy.utils.Vector;
 
+/**
+ * Version of the MutableVector class with optimisations for 2D Vectors.
+ */
 public class Vector2D extends MutableVector {
 	public static final Integer SIZE = 2;
 	public static final Integer X = 0;
@@ -19,6 +22,11 @@ public class Vector2D extends MutableVector {
 		super(vector);
 	}
 	
+	public void set(double x, double y) {
+		parts[X] = x;
+		parts[Y] = y;
+	}
+	
 	public double getX() {
 		return parts[X];
 	}
@@ -27,4 +35,14 @@ public class Vector2D extends MutableVector {
 		return parts[Y];
 	}
 
+	@Override
+	public Vector2D getCopy() {
+		return new Vector2D(parts[X], parts[Y]);
+	}
+	
+	@Override
+	public double magnatude() {
+		return Math.hypot(parts[X], parts[Y]);
+	}
+	
 }
