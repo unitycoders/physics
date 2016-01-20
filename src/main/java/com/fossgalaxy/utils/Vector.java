@@ -29,4 +29,6 @@ public interface Vector {
 	public double getComponent(int i);
 	
 	public Vector getCopy();
+	
+	public Vector negative();
 }

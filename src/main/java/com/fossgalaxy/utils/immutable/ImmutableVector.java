@@ -138,4 +138,14 @@ public class ImmutableVector extends AbstractVector {
 		return new MutableVector(parts.length, parts);
 	}
 	
+	@Override
+	public Vector negative() {
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = -parts[i];
+		}
+		
+		return new MutableVector(results.length, results);
+	}
+	
 }

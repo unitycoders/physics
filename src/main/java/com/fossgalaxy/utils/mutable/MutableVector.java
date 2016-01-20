@@ -130,5 +130,14 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	public ImmutableVector getImmutableCopy() {
 		return new ImmutableVector(parts.length, parts);
 	}
+
+	@Override
+	public MutableVector negative() {
+		for (int i=0; i<parts.length; i++) {
+			parts[i] = -parts[i];
+		}
+		
+		return this;
+	}
 	
 }
