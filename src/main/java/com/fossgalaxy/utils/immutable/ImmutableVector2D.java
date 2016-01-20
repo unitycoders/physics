@@ -37,6 +37,11 @@ public class ImmutableVector2D extends ImmutableVector {
 	}
 	
 	@Override
+	public Vector2D getMutableCopy() {
+		return new Vector2D(parts[X], parts[Y]);
+	}
+	
+	@Override
 	public double magnatude() {
 		return Math.hypot(parts[X], parts[Y]);
 	}
