@@ -1,17 +1,30 @@
 package com.fossgalaxy.utils;
 
-public class BaseVector implements Vector {
+import java.util.Arrays;
 
-	private double[] parts;
+/**
+ * A mutable n-dimensional vector class.
+ * 
+ * This vector will modifiy and return it's self as the argument
+ * to the maths functions.
+ */
+public class MutableVector implements Vector {
+
+	protected final double[] parts;
 	private int n;
 	
-	public BaseVector(int n, double ... parts){
+	public MutableVector(int n, double ... parts){
+		if (parts == null || parts.length != n) {
+			throw new IllegalArgumentException("incorrect number of parts provided");
+		}
+		
 		this.n = n;
-		this.parts = parts;
+		this.parts = Arrays.copyOf(parts, n);
 	}
 	
-	public BaseVector(Vector vector) {
+	public MutableVector(Vector vector) {
 		this.n = vector.getDimensions();
+		this.parts = new double[n];
 		for (int i=0; i<n; i++) {
 			parts[i] = vector.getComponent(i);
 		}
@@ -94,11 +107,11 @@ public class BaseVector implements Vector {
 			throw new IllegalArgumentException("invalid component");
 		}
 		
-		return i;
+		return parts[i];
 	}
 
 	public Vector getCopy() {
-		return new BaseVector(this);
+		return new MutableVector(this);
 	}
 	
 }
