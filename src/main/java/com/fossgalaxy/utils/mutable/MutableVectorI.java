@@ -1,4 +1,6 @@
-package com.fossgalaxy.utils;
+package com.fossgalaxy.utils.mutable;
+
+import com.fossgalaxy.utils.Vector;
 
 public interface MutableVectorI extends Vector {
 	

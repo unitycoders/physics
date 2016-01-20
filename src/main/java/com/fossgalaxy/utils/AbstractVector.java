@@ -10,27 +10,24 @@ import java.util.Arrays;
 public abstract class AbstractVector implements Vector {
 	
 	protected final double[] parts;
-	private int n;
 	
 	public AbstractVector(int n, double ... parts){
 		if (parts == null || parts.length != n) {
 			throw new IllegalArgumentException("incorrect number of parts provided");
 		}
 		
-		this.n = n;
 		this.parts = Arrays.copyOf(parts, n);
 	}
 	
 	public AbstractVector(Vector vector) {
-		this.n = vector.getDimensions();
-		this.parts = new double[n];
-		for (int i=0; i<n; i++) {
+		this.parts = new double[vector.getDimensions()];
+		for (int i=0; i<parts.length; i++) {
 			parts[i] = vector.getComponent(i);
 		}
 	}
 
 	public int getDimensions() {
-		return n;
+		return parts.length;
 	}
 
 	public double getComponent(int i) {

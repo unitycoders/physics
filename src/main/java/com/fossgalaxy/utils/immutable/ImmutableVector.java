@@ -1,31 +1,41 @@
-package com.fossgalaxy.utils;
+package com.fossgalaxy.utils.immutable;
 
-import java.util.Arrays;
+import com.fossgalaxy.utils.AbstractVector;
+import com.fossgalaxy.utils.Vector;
 
 /**
- * A mutable n-dimensional vector class.
+ * An immutable n-dimensional vector class.
  * 
- * This vector will modifiy and return it's self as the argument
- * to the maths functions.
+ * This vector class will always return immutable versions of the math functions.
  */
-public class MutableVector extends AbstractVector implements MutableVectorI {
-	
-	public MutableVector(int n, double ... parts){
+public class ImmutableVector extends AbstractVector {
+
+	public ImmutableVector(int n, double ... parts){
 		super(n, parts);
 	}
 	
-	public MutableVector(Vector vector) {
+	public ImmutableVector(Vector vector) {
 		super(vector);
 	}
 
 	public Vector multiply(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = parts[i] * other.getComponent(i);
+		}
+		
+		return new ImmutableVector(parts.length, results);
 	}
 
 	public Vector multiply(double other) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = parts[i] * other;
+		}
+		
+		return new ImmutableVector(parts.length, results);
 	}
 
 	public double dot(Vector other) {
@@ -34,8 +44,12 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 	}
 
 	public Vector add(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		double[] results = new double[parts.length];
+		for (int i=0; i<parts.length; i++) {
+			results[i] = parts[i] + other.getComponent(i);
+		}
+		
+		return new ImmutableVector(parts.length, results);
 	}
 
 	public Vector add(Vector other, double factor) {
@@ -86,12 +100,9 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 		return 0;
 	}
 
-	public Vector getCopy() {
-		return new MutableVector(this);
-	}
 
-	public void setComponent(int i, double newVal) {
-		parts[i] = newVal;
+	public Vector getCopy() {
+		return new ImmutableVector(this);
 	}
 	
 }

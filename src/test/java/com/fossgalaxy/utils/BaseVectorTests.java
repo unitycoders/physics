@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fossgalaxy.utils.mutable.MutableVector;
+
 public class BaseVectorTests {
 	//error margin for double checks
 	private static Double EPISLON = 1e-15;

@@ -1,29 +1,38 @@
-package com.fossgalaxy.utils;
+package com.fossgalaxy.utils.mutable;
+
+import java.util.Arrays;
+
+import com.fossgalaxy.utils.AbstractVector;
+import com.fossgalaxy.utils.Vector;
 
 /**
- * An immutable n-dimensional vector class.
+ * A mutable n-dimensional vector class.
  * 
- * This vector class will always return immutable versions of the math functions.
+ * This vector will modifiy and return it's self as the argument
+ * to the maths functions.
  */
-public class ImmutableVector extends AbstractVector {
-
+public class MutableVector extends AbstractVector implements MutableVectorI {
 	
-	public ImmutableVector(int n, double ... parts){
+	public MutableVector(int n, double ... parts){
 		super(n, parts);
 	}
 	
-	public ImmutableVector(Vector vector) {
+	public MutableVector(Vector vector) {
 		super(vector);
 	}
 
 	public Vector multiply(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		for (int i=0; i<parts.length; i++) {
+			parts[i] *= other.getComponent(i);
+		}
+		
+		return this;
 	}
 
 	public Vector multiply(double other) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public double dot(Vector other) {
@@ -32,33 +41,36 @@ public class ImmutableVector extends AbstractVector {
 	}
 
 	public Vector add(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		return add(other, 1);
 	}
 
 	public Vector add(Vector other, double factor) {
-		// TODO Auto-generated method stub
-		return null;
+		for (int i=0; i<parts.length; i++) {
+			parts[i] += (other.getComponent(i) * factor);
+		}
+		
+		return this;
 	}
 
 	public Vector subtract(Vector other) {
-		// TODO Auto-generated method stub
-		return null;
+		return subtract(other, 1);
 	}
 
 	public Vector subtract(Vector other, double factor) {
-		// TODO Auto-generated method stub
-		return null;
+		for (int i=0; i<parts.length; i++) {
+			parts[i] += (other.getComponent(i) * factor);
+		}
+		return this;
 	}
 
 	public Vector wrap(double width, double height) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public Vector normalise() {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public Vector limit(double limit) {
@@ -67,7 +79,7 @@ public class ImmutableVector extends AbstractVector {
 
 	public Vector rotate(double rads) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public Vector rotateDeg(double deg) {
@@ -84,9 +96,12 @@ public class ImmutableVector extends AbstractVector {
 		return 0;
 	}
 
-
 	public Vector getCopy() {
-		return new ImmutableVector(this);
+		return new MutableVector(this);
+	}
+
+	public void setComponent(int i, double newVal) {
+		parts[i] = newVal;
 	}
 	
 }
