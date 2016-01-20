@@ -41,7 +41,7 @@ public class Vector2D extends MutableVector {
 	}
 	
 	@Override
-	public double magnatude() {
+	public double magnitude() {
 		return Math.hypot(parts[X], parts[Y]);
 	}
 	

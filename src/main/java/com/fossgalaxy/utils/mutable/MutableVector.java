@@ -85,7 +85,7 @@ public class MutableVector extends AbstractVector implements MutableVectorI {
 
 	@Override
 	public MutableVector normalise() {
-		double length = magnatude();
+		double length = magnitude();
 		
 		for (int i=0; i<parts.length; i++) {
 			parts[i] /= length;

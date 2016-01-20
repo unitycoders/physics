@@ -23,7 +23,7 @@ public interface Vector {
 	public Vector rotate(double rads);
 	public Vector rotateDeg(double deg);
 	
-	public double magnatude();
+	public double magnitude();
 	public double distance(Vector other);
 	
 	public double getComponent(int i);

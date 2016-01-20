@@ -42,7 +42,7 @@ public class ImmutableVector2D extends ImmutableVector {
 	}
 	
 	@Override
-	public double magnatude() {
+	public double magnitude() {
 		return Math.hypot(parts[X], parts[Y]);
 	}
 }

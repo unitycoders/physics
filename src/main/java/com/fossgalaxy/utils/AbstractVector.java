@@ -37,7 +37,7 @@ public abstract class AbstractVector implements Vector {
 	}
 	
 	@Override
-	public double magnatude() {
+	public double magnitude() {
 		double length = 0;
 		
 		for (int i=0; i<parts.length; i++) {

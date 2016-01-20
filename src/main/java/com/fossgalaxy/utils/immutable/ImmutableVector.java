@@ -92,7 +92,7 @@ public class ImmutableVector extends AbstractVector {
 
 	@Override
 	public ImmutableVector normalise() {
-		double length = magnatude();
+		double length = magnitude();
 		
 		if (length == 1) {
 			return this;
