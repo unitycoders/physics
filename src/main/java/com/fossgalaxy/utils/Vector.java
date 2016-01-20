@@ -28,5 +28,5 @@ public interface Vector {
 	
 	public double getComponent(int i);
 	
-	public Vector clone();
+	public Vector getCopy();
 }
