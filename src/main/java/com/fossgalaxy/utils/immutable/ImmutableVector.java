@@ -78,7 +78,7 @@ public class ImmutableVector extends AbstractVector {
 		for (int i=0; i<parts.length; i++) {
 			results[i] = parts[i] % limits[i];
 			
-			if ( results[i] != parts[i]) {
+			if ( results[i] != parts[i] ) {
 				changed = true;
 			}
 		}

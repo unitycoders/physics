@@ -8,7 +8,6 @@ import java.util.Arrays;
  * provides things common to both immutable and mutable vectors.
  */
 public abstract class AbstractVector implements Vector {
-	
 	protected final double[] parts;
 	
 	public AbstractVector(int n, double ... parts){
@@ -77,4 +76,27 @@ public abstract class AbstractVector implements Vector {
 		
 		return sb.toString();
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(parts);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AbstractVector other = (AbstractVector) obj;
+		if (!Arrays.equals(parts, other.parts))
+			return false;
+		return true;
+	}
+
 }
