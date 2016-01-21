@@ -75,89 +75,49 @@ public class MathTests {
         );
     }
 
-
-}
-
-@RunWith(Parameterized.class)
-class subtractTest {
-
-    Vector2D a, b, expected;
-
-    public subtractTest(Vector2D a, Vector2D b, Vector2D expected) {
-        this.a = a;
-        this.b = b;
-        this.expected = expected;
-    }
-
-    @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Object[][]{
-                {new Vector2D(1, 0), new Vector2D(0, 1), new Vector2D(1, -1)},
-                {new Vector2D(0, 1), new Vector2D(1, 0), new Vector2D(-1, 1)},
-                {new Vector2D(0, 0), new Vector2D(-1, -1), new Vector2D(1, 1)}
-        });
-    }
-
     @Test
-    public void testSub() throws Exception {
+    @Parameters(method="parametersForSubtract")
+    public void testSubtract(Vector2D a, Vector2D b, Vector2D expected){
         assertEquals(expected, a.subtract(b));
     }
-}
 
-@RunWith(Parameterized.class)
-class subtractWeightedTest {
-
-    Vector2D a, b, expected;
-    double factor;
-
-    public subtractWeightedTest(Vector2D a, Vector2D b, double factor, Vector2D expected) {
-        this.a = a;
-        this.b = b;
-        this.factor = factor;
-        this.expected = expected;
-    }
-
-    @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Object[][]{
-                {new Vector2D(1, 0), new Vector2D(0, 1), 1, new Vector2D(1, -1)},
-                {new Vector2D(0, 1), new Vector2D(1, 0), -1, new Vector2D(1, 1)},
-                {new Vector2D(0, 0), new Vector2D(-1, -1), 0.5, new Vector2D(0.5, 0.5)}
-        });
+    public Object[] parametersForSubtract(){
+        return $(
+                $(new Vector2D(1, 0), new Vector2D(0, 1), new Vector2D(1, -1)),
+                $(new Vector2D(0, 1), new Vector2D(1, 0), new Vector2D(-1, 1)),
+                $(new Vector2D(0, 0), new Vector2D(-1, -1), new Vector2D(1, 1))
+        );
     }
 
     @Test
-    public void testSub() throws Exception {
+    @Parameters(method="parametersForWeightedSubtract")
+    public void testWeightedSubtract(Vector2D a, Vector2D b, double factor, Vector2D expected){
         assertEquals(expected, a.subtract(b, factor));
     }
-}
 
-@RunWith(Parameterized.class)
-class magnitudeTest {
-
-    Vector2D a;
-    double expected;
-
-    public magnitudeTest(Vector2D a, double expected) {
-        this.a = a;
-        this.expected = expected;
-    }
-
-    @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Object[][]{
-                {new Vector2D(0, 1), 1},
-                {new Vector2D(1, 0), 1},
-                {new Vector2D(1, 1), Math.sqrt(2)},
-                {new Vector2D(3, 4), 5},
-                {new Vector2D(-3, 4), 5},
-                {new Vector2D(3, -4), 5},
-                {new Vector2D(-3, -4), 5}
-        });
+    public Object[] parametersForWeightedSubtract(){
+        return $(
+                $(new Vector2D(1, 0), new Vector2D(0, 1), 1, new Vector2D(1, -1)),
+                $(new Vector2D(0, 1), new Vector2D(1, 0), -1, new Vector2D(1, 1)),
+                $(new Vector2D(0, 0), new Vector2D(-1, -1), 0.5, new Vector2D(0.5, 0.5))
+        );
     }
 
     @Test
-    public void testMag() throws Exception {
-        assertEquals(expected, a.magnitude(), MathTests.DELTA);
+    @Parameters(method="parametersForMagnitude")
+    public void testMagnitude(Vector2D a, double expected){
+        assertEquals(expected, a.magnitude(), DELTA);
+    }
+
+    public Object[] parametersForMagnitude(){
+        return $(
+                $(new Vector2D(0, 1), 1),
+                $(new Vector2D(1, 0), 1),
+                $(new Vector2D(1, 1), Math.sqrt(2)),
+                $(new Vector2D(3, 4), 5),
+                $(new Vector2D(-3, 4), 5),
+                $(new Vector2D(3, -4), 5),
+                $(new Vector2D(-3, -4), 5)
+        );
     }
 }
