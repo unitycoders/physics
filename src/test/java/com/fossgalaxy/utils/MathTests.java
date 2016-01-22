@@ -231,4 +231,36 @@ public class MathTests {
         );
     }
 
+    @Test
+    @Parameters(method = "parametersForNegative")
+    public void testNegative(Vector2D a, Vector2D expected) {
+        a.negative();
+        assertEquals(a, expected);
+    }
+
+    public Object[] parametersForNegative() {
+        return $(
+                $(new Vector2D(0, 0), new Vector2D(0, 0)),
+                $(new Vector2D(1, 1), new Vector2D(-1, -1)),
+                $(new Vector2D(-1, -1), new Vector2D(1, 1))
+        );
+    }
+
+    @Test
+    @Parameters(method = "parametersForTestCopy")
+    public void testGetCopy(Vector2D a){
+        Vector2D b = a.getCopy();
+        assertEquals(true, a.equals(b));
+        b.add(new Vector2D(1, 1));
+        assertEquals(false, a.equals(b));
+    }
+
+    public Object[] parametersForTestCopy(){
+        return $(
+                new Vector2D(0, 0),
+                new Vector2D(1, 1),
+                new Vector2D(-2, -2)
+        );
+    }
+
 }
